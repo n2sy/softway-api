@@ -15,11 +15,11 @@ const personSchema = new Schema({
         type : Number,
         required : true
     },
-    Profession : {
+    profession : {
         type : String,
         required : true
     },
-    Avatar : {
+    avatar : {
      type : String
     }
 });

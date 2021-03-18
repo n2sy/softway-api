@@ -5,10 +5,10 @@ const cvRoutes = require("./routes/cv");
 
 const app = express();
 
-app.use((req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET');
-})
+// app.use((req, res) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET');
+// })
 
 app.use(express.json());
 
