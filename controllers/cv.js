@@ -19,6 +19,43 @@ exports.getAllPersons = (req, res) => {
     // })
 }
 
+exports.getPerson = (req, res) => {
+    const pId = req.params.id;
+
+    Personne.findById(pId).then(result => {
+        if(!result) {
+            const error = new Error("Couldn't found this person");
+            error.statusCode(404);
+            throw error
+        }
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
+}
+
+exports.deletePerson = (req, res) => {
+    const pId = req.params.id;
+    Personne.findByIdAndRemove(pId)
+    .then(p => {
+        if(!p) {
+            const error = new Error("Couldn't found this person");
+            error.statusCode(404);
+            throw error
+        }
+        res.status(200).json({
+            message : "Person successfully deleted !",
+            result : p
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
+}
+
 exports.createPerson = (req, res) => {
     const prenom = req.body.prenom;
     const nom = req.body.nom;
