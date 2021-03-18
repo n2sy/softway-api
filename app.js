@@ -5,6 +5,8 @@ const cvRoutes = require("./routes/cv");
 
 const app = express();
 
+app.use(express.json());
+
 app.use('/cv', cvRoutes);
 
 mongoose.connect('mongodb://localhost:27017/softwayCv', {
