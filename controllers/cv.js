@@ -1,18 +1,22 @@
 const Personne = require("../models/personne");
 
 exports.getAllPersons = (req, res) => {
-    res.status(200).json({
-        persons : [
-            {
-                prenom : "nidhal",
-                nom : "jelassi"
-            },
-            {
-                prenom : "bilel",
-                nom : "Khelifi"
-            }
-        ]
+    Personne.find().then(result => {
+        res.status(200).json(result)
     })
+    .catch(err => console.log(err))
+    // res.status(200).json({
+    //     persons : [
+    //         {
+    //             prenom : "nidhal",
+    //             nom : "jelassi"
+    //         },
+    //         {
+    //             prenom : "bilel",
+    //             nom : "Khelifi"
+    //         }
+    //     ]
+    // })
 }
 
 exports.createPerson = (req, res) => {
