@@ -25,7 +25,7 @@ exports.getPerson = (req, res) => {
     Personne.findById(pId).then(result => {
         if(!result) {
             const error = new Error("Couldn't found this person");
-            error.statusCode(404);
+            error.statusCode = 404;
             throw error
         }
         res.status(200).json(result)
@@ -42,7 +42,7 @@ exports.deletePerson = (req, res) => {
     .then(p => {
         if(!p) {
             const error = new Error("Couldn't found this person");
-            error.statusCode(404);
+            error.statusCode = 404;
             throw error
         }
         res.status(200).json({
@@ -53,6 +53,43 @@ exports.deletePerson = (req, res) => {
     .catch(err => {
         console.log(err);
     })
+
+}
+
+exports.updatePerson = (req, res) => {
+    const pId = req.params.id;
+
+    const prenom = req.body.prenom;
+    const nom = req.body.nom;
+    const age = req.body.age;
+    const profession = req.body.profession;
+    const avatar = req.body.avatar;
+
+    Personne.findById(pId).then(p => {
+        if(!p) {
+            const error = new Error("Couldn't found this person");
+            error.statusCode = 404;
+            throw error;
+        }
+        p.prenom = prenom;
+        p.nom = nom;
+        p.age = age;
+        p.profession = profession;
+        p.avatar = avatar;
+
+        return p.save()
+    })
+    .then(result => {
+        res.status(200).json({
+            message : "Person successfully updated",
+            result : result
+        })
+    })
+    .catch(err => {
+        console.log(err);
+        //next(err)
+    })
+
 
 }
 
