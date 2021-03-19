@@ -7,7 +7,8 @@ const app = express();
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     
     next();
     
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.use('/cv', cvRoutes);
+
 
 mongoose.connect('mongodb://localhost:27017/softwayCv', {
     useNewUrlParser: true,
