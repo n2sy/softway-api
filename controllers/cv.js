@@ -56,7 +56,7 @@ exports.deletePerson = (req, res) => {
 
 }
 
-exports.updatePerson = (req, res) => {
+exports.updatePerson = (req, res, next) => {
     const pId = req.params.id;
 
     const prenom = req.body.prenom;
@@ -87,7 +87,7 @@ exports.updatePerson = (req, res) => {
     })
     .catch(err => {
         console.log(err);
-        //next(err)
+        next(err)
     })
 
 
